@@ -42,7 +42,7 @@ public class DrivetrainCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_drive.arcadeDrive(oi.getPower(), oi.getTurn());
+        m_drive.scaledArcadeDrive(oi.getPower(), .5, oi.getTurn(), .5);
     }
 
     // Called once the command ends or is interrupted.

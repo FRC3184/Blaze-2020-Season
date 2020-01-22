@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,11 +24,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private CANSparkMax frontLeftDrive;
     private CANSparkMax frontRightDrive;
 
-    private DifferentialDrive drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+    private DifferentialDrive drive;
 
     public DrivetrainSubsystem() {
-        m_rightMotors.setInverted(true);
-
         rearLeftDrive = new CANSparkMax(Constants.rearLeftDrivePort, CANSparkMaxLowLevel.MotorType.kBrushless);
         rearRightDrive = new CANSparkMax(Constants.rearRightDrivePort, CANSparkMaxLowLevel.MotorType.kBrushless);
         frontLeftDrive = new CANSparkMax(Constants.frontLeftDrivePort, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -37,6 +34,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         m_leftMotors = new SpeedControllerGroup(rearLeftDrive, frontLeftDrive);
         m_rightMotors = new SpeedControllerGroup(rearRightDrive, frontRightDrive);
+
+        drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
     }
 
     @Override
@@ -46,5 +45,21 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public void arcadeDrive(double power, double turn) {
         drive.arcadeDrive(power, turn);
+    }
+
+    public void scaledArcadeDrive(double power, double scaledMaxPower, double turn, double scaledMaxTurn) {
+        drive.arcadeDrive(powerScaler(power, scaledMaxPower), powerScaler(turn, scaledMaxTurn));
+    }
+
+    public double powerScaler(double input, double maxPower) {
+        double output;
+
+        output = scaler(input, -1, 1, -maxPower, maxPower);
+
+        return output;
+    }
+
+    private double scaler(double input, double inputMin, double inputMax, double outputMin, double outputMax) {
+        return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
     }
 }
