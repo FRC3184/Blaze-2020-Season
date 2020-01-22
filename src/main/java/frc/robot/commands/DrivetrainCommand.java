@@ -7,6 +7,10 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -19,6 +23,12 @@ public class DrivetrainCommand extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final DrivetrainSubsystem m_drive;
     private final OI oi;
+
+    private ShuffleboardTab tab = Shuffleboard.getTab("Drive");
+    private NetworkTableEntry maxSpeed = tab.add("Max Speed", 1).getEntry();
+    private NetworkTableEntry maxRot = tab.add("Max Turn", 1).getEntry();
+    private NetworkTableEntry speed = tab.add("Speed", -127).getEntry();
+    private NetworkTableEntry rot = tab.add("Turn", -127).getEntry();
 
     /**
      * Creates a new ExampleCommand.
@@ -37,12 +47,27 @@ public class DrivetrainCommand extends CommandBase {
     @Override
     public void initialize() {
         m_drive.arcadeDrive(0,0);
+
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_drive.scaledArcadeDrive(oi.getPower(), .5, oi.getTurn(), .5);
+        double power = oi.getPower();
+        double turn = oi.getTurn();
+        double maxPower = maxSpeed.getDouble(1);
+        double maxTurn = maxRot.getDouble(1);
+
+        speed.setDouble(power);
+        rot.setDouble(turn);
+
+        //SmartDashboard.putNumber("Drive Power", power);
+        //SmartDashboard.putNumber("Turn Power", turn);
+        //SmartDashboard.putNumber("Max Power", maxPower);
+        //SmartDashboard.putNumber("Max Turn", maxTurn);
+
+        m_drive.scaledArcadeDrive(power, maxPower, turn, maxTurn);
     }
 
     // Called once the command ends or is interrupted.
