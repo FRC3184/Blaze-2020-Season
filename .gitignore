@@ -164,7 +164,5 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,gradle,windows,intellij
 /.gradle/
-/.gradle/
 /.idea/modules/
-/Blaze-2020-Season.iml
 /Blaze-2020-Season.iml
