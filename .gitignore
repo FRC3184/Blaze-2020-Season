@@ -50,6 +50,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+Blaze-2020-Season.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -143,6 +144,7 @@ $RECYCLE.BIN/
 
 ### Gradle ###
 .gradle
+.gradle/
 build/
 
 # Ignore Gradle GUI config
