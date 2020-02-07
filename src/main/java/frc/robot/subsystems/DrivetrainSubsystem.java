@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -25,6 +26,22 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private CANSparkMax frontRightDrive;
 
     private DifferentialDrive drive;
+
+    public static final double ksVolts = .104;
+    public static final double kvVoltSecondsPerMeter = 2.83;
+    public static final double kaVoltSecondsSquaredPerMeter = 2.04;
+
+    public static final double kPDriveVel = 8.01;
+
+    public static final double kTrackwidthMeters = 0.553168323;
+    public static final DifferentialDriveKinematics kDriveKinematics =
+            new DifferentialDriveKinematics(kTrackwidthMeters);
+
+    public static final double kMaxSpeedMetersPerSecond = 3.0;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3.0;
+
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
 
     public DrivetrainSubsystem() {
         rearLeftDrive = new CANSparkMax(Constants.rearLeftDrivePort, CANSparkMaxLowLevel.MotorType.kBrushless);
