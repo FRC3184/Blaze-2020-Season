@@ -26,8 +26,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     private DifferentialDrive drive;
 
-
-
     public DrivetrainSubsystem() {
         rearLeftDrive = new CANSparkMax(Constants.rearLeftDrivePort, CANSparkMaxLowLevel.MotorType.kBrushless);
         rearRightDrive = new CANSparkMax(Constants.rearRightDrivePort, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -64,6 +62,4 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private double scaler(double input, double inputMin, double inputMax, double outputMin, double outputMax) {
         return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
     }
-
-
 }

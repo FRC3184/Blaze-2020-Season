@@ -20,4 +20,7 @@ public final class Constants {
     public final static int rearRightDrivePort = 3;
     public final static int frontLeftDrivePort = 2;
     public final static int frontRightDrivePort = 4;
+
+    public final static int intakeWheel = 1;
+    public final static int wrist = 5;
 }
