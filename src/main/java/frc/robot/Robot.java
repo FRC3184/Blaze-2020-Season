@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     private Command m_drivetrainCommand;
+    private Command m_intakeCommand;
 
     private RobotContainer m_robotContainer;
 
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
         m_robotContainer = new RobotContainer();
 
         m_drivetrainCommand = m_robotContainer.m_drivetrainCommand;
+        m_intakeCommand = m_robotContainer.m_intakeCommand;
     }
 
     /**
@@ -98,6 +100,7 @@ public class Robot extends TimedRobot {
         }
 
         m_drivetrainCommand.initialize();
+        m_intakeCommand.initialize();
     }
 
     /**
@@ -106,6 +109,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         m_drivetrainCommand.execute();
+        m_intakeCommand.execute();
     }
 
     @Override

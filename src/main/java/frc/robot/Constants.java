@@ -7,6 +7,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
+import java.util.Map;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -23,4 +30,7 @@ public final class Constants {
 
     public final static int intakeWheel = 1;
     public final static int wrist = 5;
+
+    public final static int wristLowerLimit = 0;
+    public final static int wristUpperLimit = 1;
 }
