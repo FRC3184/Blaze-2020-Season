@@ -53,6 +53,10 @@ public class DrivetrainCommand extends CommandBase {
         double maxPower = oi.maxSpeed();
         double maxTurn = oi.maxTurn();
 
+        oi.gyro.setDouble(m_drive.getHeading());
+        oi.leftEncoder.setDouble(m_drive.getLeftEncoderDistance());
+        oi.rightEncoder.setDouble(m_drive.getRightEncoderDistance());
+
         if (oi.reverse()) {
             power = -power;
         }

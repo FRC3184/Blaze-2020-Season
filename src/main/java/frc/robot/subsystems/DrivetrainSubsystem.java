@@ -60,6 +60,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         ahrs = new AHRS(SPI.Port.kMXP);
         
         resetEncoders();
+        zeroHeading();
         odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
 
     }
@@ -197,11 +198,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double getLeftEncoderTicks(){
-        return (((rearLeftDrive.getEncoder().getPosition())+(frontLeftDrive.getEncoder().getPosition()))/2);
+        return -(((rearLeftDrive.getEncoder().getPosition())+(frontLeftDrive.getEncoder().getPosition()))/2);
     }
 
     public double getRightEncoderTicks(){
-        return (((rearRightDrive.getEncoder().getPosition())+(frontRightDrive.getEncoder().getPosition()))/2);
+        return -(((rearRightDrive.getEncoder().getPosition())+(frontRightDrive.getEncoder().getPosition()))/2);
     }
 
     public double getLeftEncoderDistance(){

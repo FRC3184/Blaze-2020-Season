@@ -54,6 +54,10 @@ public class OI {
             .withProperties(Map.of("Min", -1, "Max", 1)).getEntry();
     private NetworkTableEntry reverse = driveTab.addPersistent("Reverse", false).withWidget(BuiltInWidgets.kToggleButton).getEntry();
 
+    public NetworkTableEntry gyro = driveTab.addPersistent("Gyro", 0).getEntry();
+    public NetworkTableEntry leftEncoder = driveTab.addPersistent("LeftEncoder", 0).getEntry();
+    public NetworkTableEntry rightEncoder = driveTab.addPersistent("RightEncoder", 0).getEntry();
+
     private ShuffleboardTab intakeTab = Shuffleboard.getTab("Intake");
 
     private NetworkTableEntry armStall = intakeTab.addPersistent("Arm Stall", .25).withWidget(BuiltInWidgets.kNumberSlider)

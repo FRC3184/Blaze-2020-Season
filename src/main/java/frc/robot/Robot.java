@@ -89,6 +89,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
+        m_robotContainer.oi.gyro.setDouble(m_robotContainer.m_drivetrainSubsystem.getHeading());
+        m_robotContainer.oi.leftEncoder.setDouble(m_robotContainer.m_drivetrainSubsystem.getLeftEncoderDistance());
+        m_robotContainer.oi.rightEncoder.setDouble(m_robotContainer.m_drivetrainSubsystem.getRightEncoderDistance());
     }
 
     @Override

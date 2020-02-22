@@ -45,7 +45,7 @@ public class RobotContainer {
 
     public final OI oi = new OI();
 
-    private DrivetrainSubsystem m_drivetrainSubsystem;
+    public DrivetrainSubsystem m_drivetrainSubsystem;
     public DrivetrainCommand m_drivetrainCommand;
 
     public IntakeSubsystem m_intakeSubsystem;
