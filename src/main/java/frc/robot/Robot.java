@@ -40,6 +40,8 @@ public class Robot extends TimedRobot {
 
         m_drivetrainCommand = m_robotContainer.m_drivetrainCommand;
         m_intakeCommand = m_robotContainer.m_intakeCommand;
+
+        m_robotContainer.oi.turnOnLed();
     }
 
     /**

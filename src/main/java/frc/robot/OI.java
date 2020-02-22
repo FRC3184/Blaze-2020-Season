@@ -1,6 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -60,6 +62,14 @@ public class OI {
             .withProperties(Map.of("Min", -1, "Max", 1)).getEntry();
     private NetworkTableEntry armPower = intakeTab.addPersistent("Army arm mc arm", .5).withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("Min", -1, "Max", 1)).getEntry();
+
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("OpenSight");
+    NetworkTableEntry entry = table.getEntry("led");
+
+    public void turnOnLed() {
+        entry.setBoolean(true);
+    }
 
     public double maxSpeed() {
         return maxSpeed.getDouble(1);

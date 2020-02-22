@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DrivetrainCommand;
@@ -29,15 +30,14 @@ public class RobotContainer {
 
     private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-    private final OI oi = new OI();
+    public final OI oi = new OI();
 
-    private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+    private DrivetrainSubsystem m_drivetrainSubsystem;
+    public DrivetrainCommand m_drivetrainCommand;
 
-    public final DrivetrainCommand m_drivetrainCommand = new DrivetrainCommand(oi, m_drivetrainSubsystem);
+    public IntakeSubsystem m_intakeSubsystem;
 
-    public final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-
-    public final IntakeCommand m_intakeCommand = new IntakeCommand(oi, m_intakeSubsystem);
+    public IntakeCommand m_intakeCommand;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -45,6 +45,35 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         configureButtonBindings();
+
+        //create commands/subsystems
+        init();
+    }
+
+    private void init() {
+        try {
+            m_drivetrainSubsystem = new DrivetrainSubsystem();
+        } catch (Exception e) {
+            DriverStation.reportWarning("Drive Subsystem failed to instantiate with error:" + e.toString(), false);
+        }
+
+        try {
+            m_drivetrainCommand = new DrivetrainCommand(oi, m_drivetrainSubsystem);
+        } catch (Exception e) {
+            DriverStation.reportWarning("Drive Command failed to instantiate with error:" + e.toString(), false);
+        }
+
+        try {
+            m_intakeSubsystem = new IntakeSubsystem();
+        } catch (Exception e) {
+            DriverStation.reportWarning("Intake Subsystem failed to instantiate with error:" + e.toString(), false);
+        }
+
+        try {
+            m_intakeCommand = new IntakeCommand(oi, m_intakeSubsystem);
+        } catch (Exception e) {
+            DriverStation.reportWarning("Intake Command failed to instantiate with error:" + e.toString(), false);
+        }
     }
 
     /**
