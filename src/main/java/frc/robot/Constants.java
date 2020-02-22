@@ -7,12 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-
-import java.util.Map;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -33,4 +28,26 @@ public final class Constants {
 
     public final static int wristLowerLimit = 0;
     public final static int wristUpperLimit = 1;
+
+    public final static boolean gyroReversed = false;
+
+    // The Robot Characterization Toolsuite provides a convenient tool for obtaining these
+    // values for your robot.
+    public static final double ksVolts = 0.104;
+    public static final double kvVoltSecondsPerMeter = 2.83;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.204;
+
+    // Example value only - as above, this must be tuned for your drive!
+    public static final double kPDriveVel = 8.01;
+
+    public static final double kTrackwidthMeters = 0.55316832;
+    public static final DifferentialDriveKinematics kDriveKinematics =
+            new DifferentialDriveKinematics(kTrackwidthMeters);
+
+    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+
+    // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
 }
